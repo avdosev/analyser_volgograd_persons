@@ -1,23 +1,31 @@
 import aiohttp
 import asyncio
-from bs4 import BeautifulSoup as BS
+from bs4 import BeautifulSoup as bs
 from safe_get import fetch_html
 
 
 async def download_news(queue):
+    site = "https://v102.ru"
     url_form = "https://v102.ru/center_line_dorabotka_ajax.php?page={num}&category={category}"
     category = 0  # maybe need other
     async with aiohttp.ClientSession() as session:
-        for i in range(1, 5):
+        for i in range(1, 2):
             url = str.format(url_form, num=i, category=category)
             html = await fetch_html(url, session)
-            news = await parse_news(html)
+            news = parse_news(html)
+            articles = await asyncio.gather(
+                *[fetch_html(link, session) for link in map(lambda article: site + article['link'], news)]
+            )
+            text_articles = map(parse_article, articles)
+            for new, new_text in zip(news, text_articles):
+                new['text'] = new_text
+                new['link'] = site + new['link']
             await queue.put(news)
 
 
 # выдает статьи
-async def parse_news(news_html):
-    html = BS(news_html, 'html.parser')
+def parse_news(news_html):
+    html = bs(news_html, 'html.parser')
     articles_elements = html.find_all(class_="new-article")
     articles = []
     for article in articles_elements:
@@ -36,5 +44,7 @@ async def parse_news(news_html):
 
 
 # Возвращшает распаршенную статью
-async def parse_article(html_article):
-    pass
+def parse_article(html_article):
+    html = bs(html_article, 'html.parser')
+    article_text = html.find(class_='n-text').get_text()
+    return article_text

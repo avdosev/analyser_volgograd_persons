@@ -7,7 +7,7 @@ from datetime import datetime
 # файл для запросов к серверу
 
 LAST_REQUEST_TIME = current_time()
-DEFAULT_WAIT_TIME = 1.5
+DEFAULT_WAIT_TIME = 1.
 SAFE_GET_LOCK = asyncio.Lock()
 
 
