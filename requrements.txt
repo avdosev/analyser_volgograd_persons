@@ -1,0 +1,4 @@
+motor=2.1.0
+aiomisc=9.7.8
+aiohttp
+aiofiles
