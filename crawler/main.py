@@ -2,13 +2,15 @@ import asyncio
 # from aiomisc import entrypoint
 from crawler import download_news
 from files import writeJSON
-import config as cfg
+import sys
+sys.path.append("..")
+from config import DATA_PATH
 
 
 async def queue_printer(queue):
     while True:
         val = await queue.get()
-        writeJSON(cfg.DATA_PATH, val)
+        writeJSON(DATA_PATH, val)
         queue.task_done()
 
 

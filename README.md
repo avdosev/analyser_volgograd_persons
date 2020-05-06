@@ -71,6 +71,11 @@ rm libmystem_c_binding.so.linux_x64.zip
 export PATH="$HOME/tomita-parser/build/bin:$PATH"
 source ~/.bashrc
 ```
+Запускаем
+```
+python3.7 crawler/main.py
+```
+
 
 ## Программный модуль для выявления тональности высказываний по отношению к
 персонам Волгоградской области и достопримечательностям.
