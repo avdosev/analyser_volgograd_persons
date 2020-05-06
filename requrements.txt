@@ -3,3 +3,4 @@ aiomisc==9.7.8
 aiohttp
 aiofiles
 bs4
+pymongo

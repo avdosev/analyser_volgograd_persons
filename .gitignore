@@ -5,6 +5,10 @@ data
 # Vagrant
 .vagrant/
 
+# tomita-parser
+input.txt
+output.txt
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
