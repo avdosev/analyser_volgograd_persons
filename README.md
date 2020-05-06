@@ -45,11 +45,31 @@ word2vec на всем объеме новостных статей из БД. �
 Достопримечательности https://avolgograd.com/sights?obl=vgg
 
 ### Установка tomita
-
-В каталоге `install` лежат установочные скрипты, которые следует запустить:
-
+Ставим софт
 ```
-    sudo ./tomitaAdmin.sh && ./tomita.sh
+apt-get update
+apt-get install build-essential cmake lua5.2
+apt-get install unzip
+```
+Собираем томиту
+```
+cd ~
+git clone https://github.com/yandex/tomita-parser
+cd tomita-parser && mkdir build && cd build
+cmake ../src/ -DCMAKE_BUILD_TYPE=Release
+make
+    
+```
+Выполняем из папки build
+```  
+wget https://github.com/yandex/tomita-parser/releases/download/v1.0/libmystem_c_binding.so.linux_x64.zip
+unzip libmystem_c_binding.so.linux_x64.zip
+rm libmystem_c_binding.so.linux_x64.zip
+```
+Экспортируем томиту
+```
+export PATH="$HOME/tomita-parser/build/bin:$PATH"
+source ~/.bashrc
 ```
 
 ## Программный модуль для выявления тональности высказываний по отношению к
