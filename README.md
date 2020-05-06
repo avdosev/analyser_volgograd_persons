@@ -22,8 +22,9 @@
 
 ### Запуск парсера на linux
 
+Для запуска обязательна версия `python 3.7+`
 ```
-python3 crawler/main.py
+python3.7 crawler/main.py
 ```
 
 Он сохранит новости в json файлы в каталоге `data/<datetime>`
