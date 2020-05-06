@@ -4,7 +4,7 @@ from datetime import datetime
 
 def writeJSON(dirname, jsonObject):
     print(f"Пишем в файл {dirname}")
-    path = os.path.join(dirname, f"{datetime.now().strftime('%H-%M-%S')}")
+    path = os.path.join(dirname, f"{datetime.now().strftime('%Y-%m-%H %H-%M-%S')}")
     os.mkdir(path)
 
     for news in jsonObject:
