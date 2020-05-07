@@ -1,26 +1,28 @@
 import asyncio
-from model import Connection, insertMongo
+from model import Connection, Mongo
 from crawler import download_news
 from files import writeJSON
 import sys
 sys.path.append("..")
 from config import DATA_PATH
+from dbconfig import TABLE_NAME, DATABASE_NAME
 
 
-async def queue_printer(conn, queue):
+async def queue_printer(mongo, queue):
     while True:
         val = await queue.get()
         writeJSON(DATA_PATH, val)
-        id = insertMongo(conn, "mydatabase", "customers", val)
+        id = mongo.insert(TABLE_NAME, val)
         queue.task_done()
 
 
 async def main():
-    conn = Connection()
+    conn = Connection().getConnection()
+    mongo = Mongo(conn, DATABASE_NAME)
 
     queue = asyncio.Queue()
     downloader = asyncio.create_task(download_news(queue))
-    printer = asyncio.create_task(queue_printer(conn, queue))
+    printer = asyncio.create_task(queue_printer(mongo, queue))
     await asyncio.gather(downloader)
     await queue.join()
     printer.cancel()

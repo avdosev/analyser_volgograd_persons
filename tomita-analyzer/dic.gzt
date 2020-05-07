@@ -1,0 +1,25 @@
+encoding "utf8";
+
+import "base.proto";
+import "articles_base.proto";
+import "fact_types.proto";
+
+TAuxDicArticle "FormulaExtract"
+{
+	key = {"tomita:first_grammar.cxx" type=CUSTOM}
+}
+
+TAuxDicArticle "governor"
+{
+	key = {'Бочаров' | 'Андрей Иванович Бочаров' | 'Губернатор Волгоградской области', 'губернатор'}
+}
+
+TAuxDicArticle "chuikov"
+{
+	key = {'маршалу Чуйкову' | 'Чуйков'}
+}
+
+TAuxDicArticle "marshall"
+{
+	key = {'маршал'}
+}

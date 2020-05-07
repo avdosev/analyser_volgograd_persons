@@ -7,8 +7,8 @@ from pymongo import MongoClient
 
 
 class Connection:
-    uri = ""
-    conn = ""
+    uri = None
+    conn = None
 
     def __init__(self, host="localhost", port="27017"):
         self.uri = f"mongodb://{host}:{port}"
@@ -18,9 +18,18 @@ class Connection:
         return self.conn
 
 
-def insertMongo(connection, databaseName: str, tableName: str, data):
-    mydb = connection.conn[databaseName]
-    mycol = mydb[tableName]
-    insertedId = mycol.insert_many(data)
-    return insertedId
+class Mongo:
+    mydb = None
+
+    def __init__(self, connection, databaseName):
+        self.mydb = connection[databaseName]
+
+    def insert(self, tableName: str, data):
+        mycol = self.mydb[tableName]
+        insertedId = mycol.insert_many(data)
+        return insertedId
+
+    def selectAll(self, tableName: str):
+        mycol = self.mydb[tableName]
+        return mycol.find()
 

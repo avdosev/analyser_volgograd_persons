@@ -8,12 +8,12 @@ Sbj -> Noun<gram="nom"> interp(SAO.Subject) AnyWord<cut>* 'и'
 Obj -> Noun<rt>;
 S -> 	Noun<gram="nom", sp-agr[1]> interp(SAO.Subject) 'и'
 		Noun<gram="nom", sp-agr[1]> interp(SAO.Subject)
-		Word<kwtype=conn_verbs, rt, gram="V",sp-agr[1]>
+		Word<kwtype=governor, rt, gram="V",sp-agr[1]>
 		interp(SAO.Action)
 		AnyWord<cut>* PR AnyWord<cut>* Obj<gram="ins">
 		interp(SAO.Object);
 S -> Sbj<sp-agr[1]>
-	Word<kwtype=conn_verbs, rt, gram="V",sp-agr[1]>
+	Word<kwtype=governor, rt, gram="V",sp-agr[1]>
 	interp(SAO.Action)
 	AnyWord<cut>* PR AnyWord<cut>* Obj<gram="ins">
 	interp(SAO.Object);
