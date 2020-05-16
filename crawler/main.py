@@ -1,5 +1,5 @@
 import asyncio
-from model import Connection, Mongo
+from dbmodel import Connection, Mongo
 from crawler import download_news
 from files import writeJSON
 import sys

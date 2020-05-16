@@ -31,5 +31,5 @@ class Mongo:
 
     def selectAll(self, tableName: str):
         mycol = self.mydb[tableName]
-        return mycol.find()
+        return list(mycol.find({}))
 
