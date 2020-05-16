@@ -1,21 +1,28 @@
 from dostoevsky.tokenization import RegexTokenizer
 from dostoevsky.models import FastTextSocialNetworkModel
-
-tokenizer = RegexTokenizer()
-tokens = tokenizer.split('всё очень плохо')  # [('всё', None), ('очень', None), ('плохо', None)]
-
-model = FastTextSocialNetworkModel(tokenizer=tokenizer)
+from model import Connection, Mongo
+from dbconfig import DATABASE_NAME, TABLE_NAME
 
 messages = [
-    'привет',
-    'я люблю тебя!!',
-    'малолетние дебилы'
+    'хорошо',
+    'неочевидно',
+    'зазорно'
 ]
 
-results = model.predict(messages, k=2)
+def predict(words):
+    results = model.predict(words, k=2)
+    return results
 
-for message, sentiment in zip(messages, results):
-    # привет -> {'speech': 1.0000100135803223, 'skip': 0.0020607432816177607}
-    # люблю тебя!! -> {'positive': 0.9886782765388489, 'skip': 0.005394937004894018}
-    # малолетние дебилы -> {'negative': 0.9525841474533081, 'neutral': 0.13661839067935944}]
+
+tokenizer = RegexTokenizer()
+model = FastTextSocialNetworkModel(tokenizer=tokenizer)
+
+conn = Connection().getConnection()
+mongo = Mongo(conn, DATABASE_NAME)
+listOfTexts = mongo.selectAll(TABLE_NAME)
+
+results = predict(listOfTexts)
+
+
+for message, sentiment in zip(listOfTexts, results):
     print(message, '->', sentiment)
