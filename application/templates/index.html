@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Python Flask Bucket List App</title>\
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+
+<body>
+
+<header class="header">
+
+</header>
+<main> статейки:
+
+     {% for message in articles %}
+     <div class="articles">
+          <a href={{ message.link }}> {{ message.title }}</a>
+
+         <time>{{ message.date }}</time>
+         <p>{{ message.text }} </p>
+         <hr>
+     </div>
+     {% endfor %}
+</main>
+
+</body>
+</html>
+
