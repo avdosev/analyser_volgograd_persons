@@ -33,3 +33,13 @@ class Mongo:
         mycol = self.mydb[tableName]
         return list(mycol.find({}))
 
+    def selectBy(self, tableName: str, fieldName:str, condition):
+        print(fieldName, condition)
+
+        mycol = self.mydb[tableName]
+        return list(mycol.find({fieldName: condition}))
+
+
+    def update(self, tableName: str, fieldName: str, newFieldValue):
+        mycol = self.mydb[tableName]
+       # mycol.update({fieldName: newFieldValue}, {$set: {salary : 300}})

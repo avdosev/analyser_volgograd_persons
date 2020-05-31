@@ -37,7 +37,9 @@ def parse_news(news_html):
             'title': title,
             'date': date,
             'link': link,
-            'count_comments': count_comments
+            'count_comments': count_comments,
+            'sequences': '',  # предложения для 2 задания
+            'tonality': ''  # тональность для 3 задания
         })
 
     return articles
