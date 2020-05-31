@@ -16,6 +16,16 @@ def main():
     return render_template('index.html', articles=articles)
 
 
+@app.route('/getTonality/<id>')
+def getTonality(id):
+    print(id)
+    import subprocess as sub
+    p = sub.Popen(["python", "tonality-analyzer", "dost.py", "--id", id], stdout=sub.PIPE, stderr=sub.PIPE)
+    out, err = p.communicate()
+    print(out)
+    print(err)
+
+
 
 
 if __name__ == "__main__":

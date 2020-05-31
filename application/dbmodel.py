@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+from bson.objectid import ObjectId
 
 # from motor.motor_asyncio import AsyncIOMotorClient
 # # TODO: make async model | Нет.
@@ -24,6 +25,9 @@ class Mongo:
     def __init__(self, connection, databaseName):
         self.mydb = connection[databaseName]
 
+    def table(self, tableName: str):
+        return self.mydb[tableName]
+
     def insert(self, tableName: str, data):
         mycol = self.mydb[tableName]
         insertedId = mycol.insert_many(data)
@@ -33,11 +37,9 @@ class Mongo:
         mycol = self.mydb[tableName]
         return list(mycol.find({}))
 
-    def selectBy(self, tableName: str, fieldName:str, condition):
-        print(fieldName, condition)
-
+    def selectBy(self, tableName: str, fieldName: str, condition):
         mycol = self.mydb[tableName]
-        return list(mycol.find({fieldName: condition}))
+        return mycol.find_one({fieldName: ObjectId(condition)})
 
 
     def update(self, tableName: str, fieldName: str, newFieldValue):
