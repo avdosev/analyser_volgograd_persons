@@ -1,45 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Python Flask Bucket List App</title>\
+    <title>Python Flask Bucket List App</title>
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
-    <script src="{{ url_for('static', filename='js/main.js') }}" > </script>
-
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </head>
-
 <body>
 
 <header class="header">
-
+    Контрольная работа по компьютерной лингвистике.
 </header>
+
 <main>
 
     <div class="articles">
 
-    {% for message in articles %}
-    <div class="article">
-        <a href={{ message.link }}> {{ message.title }}</a>
+        {% for message in articles %}
+        <div class="article">
+            <a href={{ message.link }}> {{ message.title }}</a>
 
-        <time>{{ message.date }}</time>
-        <p>{{ message.text }} </p>
+            <time>{{ message.date }}</time>
+            <p>{{ message.text }} </p>
 
-        {% if message.sequences != '' %}
-        <h4> Обработка текста через tomita не была запущена на этой новости</h4>
-        {% else %}
-        <p> {{ message.sequences }} </p>
-        {% endif %}
-        <button class="getFacts" data-id="{{ message._id }}">Получить предложения с фактами</button>
-
-        {% if message.tonality != '' %}
-        <h4> Тональность текста не определена </h4>
-        {% else %}
-        <p> {{ message.tonality }} </p>
-        {% endif %}
-        <button class="getTonality" data-id="{{ message._id }}">Запустить анализ тональности</button>
-
-        <hr>
-    </div>
-    {% endfor %}
+            <div class="facts">
+                {% if message.sequences != '' %}
+                <h4> Обработка текста через tomita не была запущена на этой новости</h4>
+                {% else %}
+                <div id="fact_{{ message._id }}"><p> {{ message.sequences }} </p></div>
+                {% endif %}
+                <button class="getFacts" data-id="{{ message._id }}">Получить предложения с фактами</button>
+            </div>
+            <div class="tonality">
+                {% if message.tonality != '' %}
+                <h4> Тональность текста не определена </h4>
+                {% else %}
+                <div id="tonality_{{ message._id }}"><p> {{ message.tonality }} </p> </div>
+                {% endif %}
+                <button class="getTonality" data-id="{{ message._id }}">Запустить анализ тональности</button>
+            </div>
+            <hr>
+        </div>
+        {% endfor %}
     </div>
 </main>
 

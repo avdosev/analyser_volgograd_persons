@@ -46,4 +46,4 @@ class Mongo:
     def update(self, tableName: str, id: str, fieldName: str, newFieldValue):
         mycol = self.mydb[tableName]
         print(f"Исправляем запись {id} по {fieldName} на {newFieldValue}")
-        mycol.update_one({'_id': id}, {'$set': {fieldName: newFieldValue}})  # ух сложненько
+        mycol.update_one({'_id': id}, {'$set': {fieldName: newFieldValue}}, upsert=False)  # ух сложненько и не робит
