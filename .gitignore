@@ -1,6 +1,6 @@
 .vscode
 .idea
-data
+application/data
 
 # Vagrant
 .vagrant/

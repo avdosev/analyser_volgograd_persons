@@ -1,4 +1,6 @@
 from flask import Flask, render_template, json, request
+from flask import jsonify, send_from_directory
+
 import sys
 sys.path.append("..")
 from dbconfig import TABLE_NAME, DATABASE_NAME
@@ -18,12 +20,11 @@ def main():
 
 @app.route('/getTonality/<id>')
 def getTonality(id):
-    print(id)
-    import subprocess as sub
-    p = sub.Popen(["python", "tonality-analyzer", "dost.py", "--id", id], stdout=sub.PIPE, stderr=sub.PIPE)
-    out, err = p.communicate()
-    print(out)
-    print(err)
+    from tonality.dost import  tokenizeById
+    token = tokenizeById(id)
+    print(token)
+    return jsonify(token)
+
 
 
 

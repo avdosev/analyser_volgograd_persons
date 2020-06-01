@@ -30,6 +30,7 @@ class Mongo:
 
     def insert(self, tableName: str, data):
         mycol = self.mydb[tableName]
+        print("Пишем в бд")
         insertedId = mycol.insert_many(data)
         return insertedId
 
@@ -42,6 +43,7 @@ class Mongo:
         return mycol.find_one({fieldName: ObjectId(condition)})
 
 
-    def update(self, tableName: str, fieldName: str, newFieldValue):
+    def update(self, tableName: str, id: str, fieldName: str, newFieldValue):
         mycol = self.mydb[tableName]
-       # mycol.update({fieldName: newFieldValue}, {$set: {salary : 300}})
+        print(f"Исправляем запись {id} по {fieldName} на {newFieldValue}")
+        mycol.update_one({'_id': id}, {'$set': {fieldName: newFieldValue}})  # ух сложненько

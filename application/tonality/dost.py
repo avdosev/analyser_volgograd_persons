@@ -12,36 +12,28 @@ from dbconfig import DATABASE_NAME, TABLE_NAME
 
 
 def tokenizeById(id):
-    allTable = mongo.selectBy(TABLE_NAME, '_id', id)
-    print(allTable)
+    row = mongo.selectBy(TABLE_NAME, '_id', id)
+    text = [row['text']]
+    res = analyze(text)
+    print(res)
+    mongo.update(TABLE_NAME, id, 'tonality', res)
+    return res
 
 
 def tokenizeByText(text: str):
-    allTable = mongo.selectBy(TABLE_NAME, 'text', text)
+    messages = [text]
+    res = analyze(messages)
+    print(res)
+    return res
 
 
 def predict(words):
-    return model.predict(words, k=2)
+    return model.predict(words, k=1)
 
 
 def analyze(text: list):
-    # countSum = {'count': 0, 'sum': 0}
-    articleTonality = {'positive': {'count': 0, 'sum': 0},
-                       'negative': {'count': 0, 'sum': 0},
-                       'neutral': {'count': 0, 'sum': 0},
-                       'skip': {'count': 0, 'sum': 0}
-                       }
     results = predict(text)
-    for message, sentiment in zip(text, results):
-        for tonality in articleTonality:
-            if tonality in sentiment:
-                if sentiment[tonality] > 0.5:
-                    articleTonality[tonality]['count'] += 1
-
-    if articleTonality['positive']['count'] > articleTonality['negative']['count']:
-        return 'Negative'
-    else:
-        return 'Positive'
+    return results[0]
 
 
 tokenizer = RegexTokenizer()
@@ -63,3 +55,5 @@ if __name__ == "__main__":
         tokenizeById(args.id)
     elif args.text:
         tokenizeByText(args.text)
+    else:
+        print("Аргументы не предоставлены.")

@@ -4,7 +4,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const getFactsBtn = document.getElementsByClassName('getFacts')
 
     for(const btn of getTonalityBtn) {
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', async (event) => {
+            const articleId = event.target.dataset.id
+            const res = await fetch(`/getTonality/${articleId}`)
+            const tonality = await res.json()
 
         })
     }
