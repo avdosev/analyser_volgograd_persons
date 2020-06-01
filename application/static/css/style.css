@@ -1,5 +1,9 @@
 body {
-  margin-left: 30px;
+  width: 65%;
+  margin: auto;
 }
 
-
+.info {
+  display: flex;
+  justify-content: space-between;
+}

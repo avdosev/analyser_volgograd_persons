@@ -8,11 +8,11 @@
 <body>
 
 <header class="header">
-    Контрольная работа по компьютерной лингвистике.
+    <h1>Контрольная работа по компьютерной лингвистике. </h1>
 </header>
 
 <main>
-
+    <h2>Статьи:</h2>
     <div class="articles">
 
         {% for message in articles %}
@@ -22,21 +22,24 @@
             <time>{{ message.date }}</time>
             <p>{{ message.text }} </p>
 
-            <div class="facts">
-                {% if message.sequences != '' %}
-                <h4> Обработка текста через tomita не была запущена на этой новости</h4>
-                {% else %}
-                <div id="fact_{{ message._id }}"><p> {{ message.sequences }} </p></div>
-                {% endif %}
-                <button class="getFacts" data-id="{{ message._id }}">Получить предложения с фактами</button>
-            </div>
-            <div class="tonality">
-                {% if message.tonality != '' %}
-                <h4> Тональность текста не определена </h4>
-                {% else %}
-                <div id="tonality_{{ message._id }}"><p> {{ message.tonality }} </p> </div>
-                {% endif %}
-                <button class="getTonality" data-id="{{ message._id }}">Запустить анализ тональности</button>
+            <div class="info">
+                <div class="facts">
+                    <button class="getFacts" data-id="{{ message._id }}">Получить предложения с фактами</button>
+                    {% if message.sequences != '' %}
+                    <h4> Обработка текста через tomita не была запущена на этой новости</h4>
+                    {% else %}
+                    <div id="fact_{{ message._id }}"><p> {{ message.sequences }} </p></div>
+                    {% endif %}
+                </div>
+
+                <div class="tonality">
+                    <button class="getTonality" data-id="{{ message._id }}">Запустить анализ тональности</button>
+                    {% if message.tonality != '' %}
+                    <h4> Тональность текста не определена </h4>
+                    {% else %}
+                    <div id="tonality_{{ message._id }}"><p> {{ message.tonality }} </p></div>
+                    {% endif %}
+                </div>
             </div>
             <hr>
         </div>
