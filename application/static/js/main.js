@@ -8,7 +8,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const articleId = event.target.dataset.id
             const res = await fetch(`/getTonality/${articleId}`)
             const tonality = await res.json()
-
+            console.log(tonality)
+            const tonalityElement = document.getElementById("tonality_" + articleId)
+            tonalityElement.innerText = JSON.stringify(tonality);
         })
     }
 

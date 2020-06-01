@@ -26,7 +26,12 @@ def getTonality(id):
     return jsonify(token)
 
 
-
+@app.route('/getFacts/<id>')
+def getFacts(id):
+    from tomita.main import getFactsById
+    tokens = getFactsById(id)
+    print(tokens)
+    return jsonify(tokens)
 
 
 if __name__ == "__main__":

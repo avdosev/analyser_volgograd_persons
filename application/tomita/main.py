@@ -7,15 +7,20 @@ from config import DATA_PATH
 from model import Connection, Mongo
 from dbconfig import TABLE_NAME, DATABASE_NAME
 
+
+def getFactsById(id):
+    text = [mongo.selectBy(TABLE_NAME, '_id', id)['text']]
+    res = analyze(text)
+    mongo.update(TABLE_NAME, id, 'sequences', res)
+
+
 # рекурсивно обходим все подкаталоги папки дата
 # загружаем с каждого json text
 # для каждого из них создаем output
 # создаем файлик input.txt с новым текстом
 # получаем output.txt
 # сохраняем его в бд)
-
-
-def analyze(data: list):
+def analyze(data: list): # функция должна вернуть факты и записать их в бд в sequences
     for text in data:
         with open(os.path.join(os.getcwd(), 'input.txt'), 'w') as inputFile:
             inputFile.writelines(text)
