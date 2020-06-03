@@ -1,23 +1,25 @@
 encoding "utf8";
 
 TTextMinerConfig {
-	Dictionary = "dic.gzt";
-	PrettyOutput = "pretty.html";
-	
-	Input = {
-		File = "input.txt";
-	}
+  Dictionary = "dic.gzt";
 
-	Output = {
-		File = "output.txt";
-		Format = text;
-	}
+  PrettyOutput = "pretty.html";
 
-Articles = [
-		{ Name = "FormulaExtract" }
-	]
+  Input = {
+    File = "input.txt";
+  }
 
-Facts = [
-		{ Name = "SAO" }
-	]
+  Articles = [
+    { Name = "имя" },
+    { Name = "People" }
+  ]
+
+  Facts = [
+    { Name = "Person" }
+  ]
+
+  Output = {
+    File = "output.txt";
+    Format = text;
+  }
 }

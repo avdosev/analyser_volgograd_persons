@@ -4,27 +4,29 @@ import subprocess as sub
 import sys
 sys.path.append("..")
 from config import DATA_PATH
-from model import Connection, Mongo
+from dbmodel import Connection, Mongo
 from dbconfig import TABLE_NAME, DATABASE_NAME
+
+
+conn = Connection().getConnection()
+mongo = Mongo(conn, DATABASE_NAME)
 
 
 def getFactsById(id):
     text = [mongo.selectBy(TABLE_NAME, '_id', id)['text']]
     res = analyze(text)
     mongo.update(TABLE_NAME, id, 'sequences', res)
+    return res
 
 
-# рекурсивно обходим все подкаталоги папки дата
-# загружаем с каждого json text
-# для каждого из них создаем output
-# создаем файлик input.txt с новым текстом
-# получаем output.txt
-# сохраняем его в бд)
-def analyze(data: list): # функция должна вернуть факты и записать их в бд в sequences
+def analyze(data: list):  # функция должна вернуть факты и записать их в бд в sequences # но она делает не то
     for text in data:
+        if os.path.split(os.getcwd())[-1] != "tomita":
+            os.chdir("tomita")
+
         with open(os.path.join(os.getcwd(), 'input.txt'), 'w') as inputFile:
             inputFile.writelines(text)
-            p = sub.Popen(["tomita-parser", "config.proto"], stdout=sub.PIPE, stderr=sub.PIPE)
+            p = sub.Popen(["tomitaparser", "config.proto"], stdout=sub.PIPE, stderr=sub.PIPE)
             out, err = p.communicate()
             print(out, err)
             with open(os.path.join(os.getcwd(), 'output.txt')) as outputFile:

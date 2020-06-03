@@ -1,9 +1,0 @@
-import "base.proto";
-import "facttypes_base.proto";  
-
-message SAO: NFactType.TFact
-{
-	required string Subject = 1;
-	repeated string Action = 2;
-	repeated string Object = 3;
-}

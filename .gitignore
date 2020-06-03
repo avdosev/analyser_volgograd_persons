@@ -8,6 +8,7 @@ application/data
 # tomita-parser
 input.txt
 output.txt
+*.exe
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

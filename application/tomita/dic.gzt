@@ -2,24 +2,15 @@ encoding "utf8";
 
 import "base.proto";
 import "articles_base.proto";
-import "fact_types.proto";
 
-TAuxDicArticle "FormulaExtract"
+import "facttypes.proto";
+
+TAuxDicArticle "имя"
 {
-	key = {"tomita:first_grammar.cxx" type=CUSTOM}
+    key = { "alg:fio" type=CUSTOM }
 }
 
-TAuxDicArticle "governor"
+TAuxDicArticle "People"
 {
-	key = {'Бочаров' | 'Андрей Иванович Бочаров' | 'Губернатор Волгоградской области', 'губернатор'}
-}
-
-TAuxDicArticle "chuikov"
-{
-	key = {'маршалу Чуйкову' | 'Чуйков'}
-}
-
-TAuxDicArticle "marshall"
-{
-	key = {'маршал'}
+    key = { "tomita:people.cxx" type=CUSTOM }
 }
