@@ -7,7 +7,7 @@
     flask run
     
 На localhost:8050 поднимется сервер примерно с таким интерфейсом:
-![](https://downloader.disk.yandex.ru/preview/592fcd66d4e75f6fe6f67c28bb25d77069add502f6e313be93bdc69b74d71723/5ed83426/3wSkgHpgGx1-n13u3kKi70ImnTm9YEbKuLLvC7LyRDOPqxv1181wqMQeF_u5eEOfONquzLYwWkprjjpuPh-GYw==?uid=0&filename=2020-06-03_23-29-47.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&tknv=v2&owner_uid=131303818&size=2048x2048)
+![](https://d.radikal.ru/d22/2006/7c/c977041dd7a6.png)
 Для проверки работы второго студента, нужно нажать левую кнопку, для третьего студента - правую.
 
 ### Подробное описание модулей и их ручной запуск:
