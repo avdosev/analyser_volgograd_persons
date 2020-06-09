@@ -26,7 +26,7 @@ def analyze(data: list):  # функция должна вернуть факт�
 
         with open(os.path.join(os.getcwd(), 'input.txt'), 'w') as inputFile:
             inputFile.writelines(text)
-            p = sub.Popen(["tomitaparser", "config.proto"], stdout=sub.PIPE, stderr=sub.PIPE)
+            p = sub.Popen(["tomitaparser", "places.proto"], stdout=sub.PIPE, stderr=sub.PIPE)
             out, err = p.communicate()
             print(out, err)
             with open(os.path.join(os.getcwd(), 'output.txt')) as outputFile:

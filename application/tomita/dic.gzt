@@ -14,3 +14,8 @@ TAuxDicArticle "People"
 {
     key = { "tomita:people.cxx" type=CUSTOM }
 }
+
+TAuxDicArticle "Facts"
+{
+    key = { "tomita:places.cxx" type=CUSTOM }
+}
