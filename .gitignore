@@ -10,6 +10,8 @@ input.txt
 output.txt
 *.exe
 
+*.bin
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

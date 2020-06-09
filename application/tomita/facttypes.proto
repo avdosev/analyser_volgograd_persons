@@ -7,9 +7,8 @@ message Person: NFactType.TFact
     required NFactType.TFio Name = 1;
 }
 
-
+// не знаю как сделать класс, чтобы отображался везде
 message PlaceName: NFactType.TFact
 {
-// Тип данных должен быть NFactType.TFio, а не привычный string.
-    required NFactType.TFio Facts = 1;
+    required NFactType.TFio PlaceName = 1;
 }
