@@ -8,7 +8,7 @@ message Person: NFactType.TFact
 }
 
 // не знаю как сделать класс, чтобы отображался везде
-message PlaceName: NFactType.TFact
+message Place: NFactType.TFact
 {
-    required NFactType.TFio PlaceName = 1;
+    required NFactType.TFio Name = 1;
 }
