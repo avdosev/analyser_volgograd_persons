@@ -15,8 +15,31 @@ mongo = Mongo(conn, DATABASE_NAME)
 def getFactsById(id):
     text = [mongo.selectBy(TABLE_NAME, '_id', id)['text']]
     res = analyze(text)
+    res  = normalizeOutput(res)
     mongo.update(TABLE_NAME, id, 'sequences', res)
     return res
+
+
+def normalizeOutput(array: list):
+    persons = []
+    places = []
+    for object in array:
+        if (object == "Person"):
+            personInsert = True
+        elif object == "{": continue
+        elif object == "}":
+            placeInsert = False
+            personInsert = False
+        elif (object == "Place"):
+            placeInsert = True
+        else:
+            leftSide, rightSide = object.split(" = ")
+            fact = {leftSide: rightSide}
+            if (personInsert): persons.append(fact)
+            elif placeInsert: places.append(fact)
+    return {'Persons': persons, "Places": places}
+
+    # {name: %realName%}
 
 
 def analyze(data: list):  # функция должна вернуть факты и записать их в бд в sequences # но она делает не то
@@ -32,8 +55,20 @@ def analyze(data: list):  # функция должна вернуть факт�
         print(out, err)
         output = []
         with open(os.path.join(os.getcwd(), 'output.txt'), 'r', encoding='utf-8') as outputFile:
-            output.append(outputFile.readlines())
+            readedNews = outputFile.readlines()
+            appending = False
+            for news in readedNews:
+
+                if "Person" in news or "Place" in news:
+                    appending = True
+                if appending:
+                    output.append(news.strip())
+                if "}" in news:
+                    appending = False
         return output
+
+
+
 
 
 def getDataJSONs():
