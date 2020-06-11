@@ -30,8 +30,10 @@ def analyze(data: list):  # функция должна вернуть факт�
         p = sub.Popen(["tomitaparser", "persons.proto"], stdout=sub.PIPE, stderr=sub.PIPE)
         out, err = p.communicate()
         print(out, err)
+        output = []
         with open(os.path.join(os.getcwd(), 'output.txt'), 'r', encoding='utf-8') as outputFile:
-            print(outputFile.readlines())
+            output.append(outputFile.readlines())
+        return output
 
 
 def getDataJSONs():
