@@ -10,14 +10,13 @@ TTextMinerConfig {
   }
 
   Articles = [
-    { Name = "имя" },
     { Name = "People" },
-    { Name = "Facts" }
+    { Name = "Places" }
   ]
 
   Facts = [
     { Name = "Person" },
-    { Name = "PlaceName" }
+    { Name = "Place" }
   ]
 
   Output = {

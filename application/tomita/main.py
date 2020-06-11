@@ -24,18 +24,19 @@ def analyze(data: list):  # функция должна вернуть факт�
         if os.path.split(os.getcwd())[-1] != "tomita":
             os.chdir("tomita")
 
-        with open(os.path.join(os.getcwd(), 'input.txt'), 'w') as inputFile:
+        with open(os.path.join(os.getcwd(), 'input.txt'), 'w', encoding='utf-8') as inputFile:
             inputFile.writelines(text)
-            p = sub.Popen(["tomitaparser", "places.proto"], stdout=sub.PIPE, stderr=sub.PIPE)
-            out, err = p.communicate()
-            print(out, err)
-            with open(os.path.join(os.getcwd(), 'output.txt')) as outputFile:
-                print(outputFile.readlines())
+
+        p = sub.Popen(["tomitaparser", "persons.proto"], stdout=sub.PIPE, stderr=sub.PIPE)
+        out, err = p.communicate()
+        print(out, err)
+        with open(os.path.join(os.getcwd(), 'output.txt'), 'r', encoding='utf-8') as outputFile:
+            print(outputFile.readlines())
 
 
 def getDataJSONs():
     data = []
-    for address, dirs, files in os.walk(DATA_PATH):
+    for address, dirs, files in os.walk('.'):
         for file in files:
             if not file.endswith(".json"):
                 continue

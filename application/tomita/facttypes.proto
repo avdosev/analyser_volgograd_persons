@@ -10,5 +10,5 @@ message Person: NFactType.TFact
 // не знаю как сделать класс, чтобы отображался везде
 message Place: NFactType.TFact
 {
-    required NFactType.TFio Name = 1;
+    required string Name = 1;
 }
