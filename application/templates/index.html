@@ -17,14 +17,14 @@
 
         {% for message in articles %}
         <div class="article">
-            <a href={{ message.link }}> {{ message.title }}</a>
+            <a href={{ message.link }} class="article-title"> {{ message.title }}</a>
 
             <time>{{ message.date }}</time>
             <p>{{ message.text }} </p>
 
             <div class="info">
                 <div class="facts">
-                    <button class="getFacts" data-id="{{ message._id }}">Получить предложения с фактами</button>
+                    <button class="getFacts white-btn" data-id="{{ message._id }}">Получить предложения с фактами</button>
                     {% if message.sequences != '' %}
                     <h4> Обработка текста через tomita не была запущена на этой новости</h4>
                     {% else %}
@@ -33,7 +33,7 @@
                 </div>
 
                 <div class="tonality">
-                    <button class="getTonality" data-id="{{ message._id }}">Запустить анализ тональности</button>
+                    <button class="getTonality white-btn" data-id="{{ message._id }}">Запустить анализ тональности</button>
                     {% if message.tonality != '' %}
                     <h4> Тональность текста не определена </h4>
                     {% else %}
@@ -41,7 +41,6 @@
                     {% endif %}
                 </div>
             </div>
-            <hr>
         </div>
         {% endfor %}
     </div>
