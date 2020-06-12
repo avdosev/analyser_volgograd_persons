@@ -1,7 +1,7 @@
 import aiohttp
 import asyncio
 from bs4 import BeautifulSoup as bs
-from safe_get import fetch_html
+from crawler.safe_get import fetch_html
 
 
 async def download_news(queue):
