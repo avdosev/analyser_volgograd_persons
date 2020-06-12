@@ -27,8 +27,13 @@ function transformToUl(arr, title) {
     } else {
         html += `<p>${title}</p>`
         html += '<ul>'
-        for (const elem of arr) {
-            html += `<li>${JSON.stringify(elem).replaceAll(/\{|\}/g, '')}</li>`
+        if (typeof arr[Symbol.iterator] === 'function') {
+            for (const elem of arr) {
+                html += `<li>${JSON.stringify(elem).split(/\{|\}/g).join('')}</li>`
+            }
+        }
+        else {
+            html += JSON.stringify(arr)
         }
         html += '</ul>'
     }
