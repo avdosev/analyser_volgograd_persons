@@ -25,20 +25,12 @@
             <div class="info">
                 <div class="facts">
                     <button class="getFacts white-btn" data-id="{{ message._id }}">Получить предложения с фактами</button>
-                    {% if message.sequences != '' %}
-                    <h4> Обработка текста через tomita не была запущена на этой новости</h4>
-                    {% else %}
-                    <div id="fact_{{ message._id }}"><p> {{ message.sequences }} </p></div>
-                    {% endif %}
+                    <div id="fact_{{ message._id }}"></div>
                 </div>
 
                 <div class="tonality">
                     <button class="getTonality white-btn" data-id="{{ message._id }}">Запустить анализ тональности</button>
-                    {% if message.tonality != '' %}
-                    <h4> Тональность текста не определена </h4>
-                    {% else %}
-                    <div id="tonality_{{ message._id }}"><p> {{ message.tonality }} </p></div>
-                    {% endif %}
+                    <div id="tonality_{{ message._id }}"></div>
                 </div>
             </div>
         </div>
