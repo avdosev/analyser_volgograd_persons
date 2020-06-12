@@ -23,6 +23,7 @@ def main():
     return render_template('index.html', articles=articles)
 
 
+
 @app.route('/getTonality/<id>')
 def getTonality(id):
     from tonality.dost import  tokenizeById

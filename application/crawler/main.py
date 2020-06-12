@@ -10,7 +10,6 @@ from crawler.crawler import download_news
 async def queue_printer(mongo, queue):
     while True:
         val = await queue.get()
-        #writeJSON(DATA_PATH, val) # а это уже не нужно наверно, но пусть будет
         id = mongo.insert(TABLE_NAME, val)
         queue.task_done()
 
