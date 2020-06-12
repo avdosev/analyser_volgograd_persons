@@ -1,11 +1,10 @@
 import asyncio
-from files import writeJSON
 import sys
 sys.path.append("..")
 from config import DATA_PATH
 from dbconfig import TABLE_NAME, DATABASE_NAME
 from dbmodel import Connection, Mongo
-from crawler import download_news
+from crawler.crawler import download_news
 
 
 async def queue_printer(mongo, queue):
@@ -27,6 +26,10 @@ async def main():
     await queue.join()
     printer.cancel()
     await asyncio.gather(printer, return_exceptions=True)
+
+
+def run():
+    asyncio.run(main())
 
 
 if __name__ == '__main__':

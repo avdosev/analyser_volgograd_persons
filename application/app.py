@@ -15,6 +15,11 @@ mongo = Mongo(conn, DATABASE_NAME)
 @app.route('/')
 def main():
     articles = mongo.selectAll(TABLE_NAME)
+    if len(articles) < 1:
+        from crawler.main import run
+        print("Записи не найдены, парсим")
+        run()
+        articles = mongo.selectAll(TABLE_NAME)
     return render_template('index.html', articles=articles)
 
 
