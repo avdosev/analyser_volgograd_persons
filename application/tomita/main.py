@@ -13,10 +13,16 @@ mongo = Mongo(conn, DATABASE_NAME)
 
 
 def getFactsById(id):
-    text = [mongo.selectBy(TABLE_NAME, '_id', id)['text']]
-    res = analyze(text)
-    res  = normalizeOutput(res)
-    mongo.update(TABLE_NAME, id, 'sequences', res)
+    record = mongo.selectBy(TABLE_NAME, '_id', id)
+    print(record)
+    if 'sequences' in record and record['sequences'] != '':
+        res = record['sequences']
+    else:
+        text = [record['text']]
+        res = analyze(text)
+        res  = normalizeOutput(res)
+        mongo.update(TABLE_NAME, id, 'sequences', res)
+    
     return res
 
 
