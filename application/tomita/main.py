@@ -56,7 +56,7 @@ def analyze(data: list):  # функция должна вернуть факт�
         with open(os.path.join(os.getcwd(), 'input.txt'), 'w', encoding='utf-8') as inputFile:
             inputFile.writelines(text)
 
-        p = sub.Popen(["tomitaparser", "persons.proto"], stdout=sub.PIPE, stderr=sub.PIPE)
+        p = sub.Popen(["tomita-parser", "persons.proto"], stdout=sub.PIPE, stderr=sub.PIPE)
         out, err = p.communicate()
         print(out, err)
         output = []
