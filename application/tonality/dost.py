@@ -28,7 +28,7 @@ def tokenizeByText(text: str):
 
 
 def predict(words):
-    return model.predict(words, k=1)
+    return model.predict(words, k=4)
 
 
 def analyze(text: list):
