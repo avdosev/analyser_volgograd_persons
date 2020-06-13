@@ -5,3 +5,4 @@ aiofiles
 bs4
 pymongo
 flask
+dostoevsky
