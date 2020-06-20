@@ -9,6 +9,22 @@ import string
 import datetime
 
 
+def find_synonyms(elements, model, spark_session, count=5):
+    result = []
+    for element in elements:
+        try:
+            elementDF = spark_session.createDataFrame(
+                [(element[0].lower().split(" "),)], 
+                ["words"])
+            transform_elem = model.transform(elementDF)
+            synonyms = model.findSynonyms(transform_elem.collect()[0][1], count).collect()
+            result.append(synonyms)
+        except Exception:
+            result.append([])
+
+    return result
+
+
 def remove_punctuation(text):
     """
     Удаление пунктуации из текста
