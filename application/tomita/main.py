@@ -96,9 +96,6 @@ def getDataDBs(mongo):
 
 
 if __name__ == '__main__':
-    conn = Connection().getConnection()
-    mongo = Mongo(conn, DATABASE_NAME)
-
     data = getDataJSONs()
     #data = getDataDBs(mongo)
     analyze(data)
