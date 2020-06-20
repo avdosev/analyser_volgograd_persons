@@ -36,20 +36,6 @@ def print_elem(elements, elements_synonyms):
             print(el[0])
 
 
-def insert_to_persons_synonyms(con, persons, persons_synonyms):
-    with con.cursor() as cur:
-        for i in range(len(persons_synonyms)):
-            for person_synonym in persons_synonyms[i]:
-                cur.execute("INSERT INTO persons_synonyms (fullname, synonym) VALUES (%s, %s);",
-                            (persons[i][0], person_synonym[0]))
-
-
-def insert_to_places_synonyms(con, places, places_synonyms):
-    with con.cursor() as cur:
-        for i in range(len(places_synonyms)):
-            for place_synonym in places_synonyms[i]:
-                cur.execute("INSERT INTO places_synonyms (`name`, synonym) VALUES (%s, %s);",
-                            (places[i][0], place_synonym[0]))
 
 
 def main():
@@ -70,13 +56,9 @@ def main():
 
     pprint("Поиск контекстных синонимов персон:")
     persons_synonyms = get_synonyms(persons, 5, model, spark)
-    insert_to_persons_synonyms(db_con, persons, persons_synonyms)
-    print_elem(persons, persons_synonyms)
 
     pprint("Поиск контекстных синонимов достопримечательностей:")
     places_synonyms = get_synonyms(places, 5, model, spark)
-    insert_to_places_synonyms(db_con, places, places_synonyms)
-    print_elem(places, places_synonyms)
 
     spark.stop()
 
